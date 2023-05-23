@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="header my-3">
-            <a href="{{ route('types.index') }}" class="btn btn-danger">Back to the Types</a>
+            <a href="{{ route('admin.types.index') }}" class="btn btn-danger">Back to the Types</a>
         </div>
         <h1>{{ $type->type }}</h1>
        

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="header my-3 d-flex gap-2">
             <a href="{{ route('welcome') }}" class="btn btn-danger">Back to the home</a>
-            <a href="{{route('projects.create')}}" class="btn btn-primary">Add new Project</a>
+            <a href="{{route('admin.projects.create')}}" class="btn btn-primary">Add new Project</a>
         </div>
         <table class="table">
             <thead>
@@ -24,10 +24,10 @@
                         <td>{{ $project->owner }}</td>
                         <td>{{ $project->contributors }}</td>
                         <td>{{ $project->languages }}</td>
-                        <td><a href="{{ route('projects.show', $project->id) }}" class="btn btn-success">Info</a></td>
-                        <td><a href="{{ route('projects.edit', $project->id) }}" class="btn btn-warning">Edit</a></td>
+                        <td><a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-success">Info</a></td>
+                        <td><a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">Edit</a></td>
                         <td>
-                            <form action="{{ route('projects.destroy', $project->id) }}" method="POST">
+                            <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger">Delete</button>

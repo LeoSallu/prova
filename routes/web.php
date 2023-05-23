@@ -18,16 +18,26 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+
+Route::middleware(['auth','verified'])
+->name('admin.')
+->prefix('admin')
+->group(function(){
     Route::resource('projects', ProjectController::class);
-});
-Route::middleware('auth')->group(function () {
     Route::resource('types', TypeController::class);
 });
+
+// Route::middleware('auth')->group(function () {
+//     Route::resource('projects', ProjectController::class);
+// });
+// Route::middleware('auth')->group(function () {
+//     Route::resource('types', TypeController::class);
+// });
 
 
 require __DIR__.'/auth.php';

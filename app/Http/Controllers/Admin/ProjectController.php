@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
-use App\Models\Type;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -19,7 +19,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view('projects.index', compact('projects'));
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -30,7 +30,7 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('projects.create',compact('types'));
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -48,7 +48,7 @@ class ProjectController extends Controller
             $newProject->image = Storage::put('uploads', $data['image']);
         }
         $newProject->save();
-        return to_route('projects.index');
+        return to_route('admin.projects.index');
     }
 
     /**
@@ -58,8 +58,8 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
-    {
-        return view('projects.show', compact('project'));
+    {   
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -70,7 +70,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('projects.edit',compact('project'));
+        $types = Type::all();
+        return view('admin.projects.edit',compact('project','types'));
     }
 
     /**
@@ -97,7 +98,7 @@ class ProjectController extends Controller
             }
         }
         $project->update($data);
-        return to_route('projects.index');
+        return to_route('admin.projects.index');
     }
 
     /**
@@ -112,6 +113,6 @@ class ProjectController extends Controller
             Storage::delete($project->image);
         }
         $project->delete();
-        return to_route('projects.index');
+        return to_route('admin.projects.index');
     }
 }
